@@ -1,4 +1,6 @@
 # SITL gazebo docker
+* Firmware is located at ~/Projects/Firmware
+* catkin is located at ~/Projects/catkin
 
 ## Clone repo
 ```
