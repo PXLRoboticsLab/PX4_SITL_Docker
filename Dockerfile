@@ -23,7 +23,7 @@ RUN apt-key add /root/Cyberbotics.asc \
         && apt-get install -y software-properties-common \
         && apt-add-repository 'deb http://www.cyberbotics.com/debian/ binary-amd64/' \
         && apt-get update \
-        && apt-get install -y webots libnss3 \
+        && apt-get install -y libnss3 \
         && rm -rf /var/lib/apt/lists/*
 
 USER user
@@ -52,7 +52,7 @@ RUN apt-get update && apt-get install -q -y \
     && rm -rf /var/lib/apt/lists/*
 
 # setup keys
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 421C365BD9FF1F717815A3895523BAEEB01FA116
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 # setup sources.list
 RUN echo "deb http://packages.ros.org/ros/ubuntu `lsb_release -sc` main" > /etc/apt/sources.list.d/ros-latest.list
@@ -93,6 +93,7 @@ RUN pip install --upgrade pip
 RUN pip install pandas jinja2 pyserial pyyaml
 
 RUN git clone https://github.com/mavlink/mavros.git /opt/PXL/catkin_ws/src/mavros
+RUN /bin/bash -c 'cd /opt/PXL/catkin_ws/src/mavros ; git checkout 0.31.0; cd ~'
 RUN bash /opt/PXL/catkin_ws/src/mavros/mavros/scripts/install_geographiclib_datasets.sh
 
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd /opt/PXL/catkin_ws; catkin_make'
@@ -125,7 +126,7 @@ RUN git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack  \
 
 # Arno alternations
 RUN git clone https://github.com/PX4/Firmware.git ~/Programs/Firmware
-RUN /bin/bash -c 'cd ~/Programs/Firmware; git checkout tags/v1.8.2; cd ~'
+RUN /bin/bash -c 'cd ~/Programs/Firmware; git checkout tags/v1.9.1; cd ~'
 
 
 COPY ./.tmux.conf /home/user/.tmux.conf
