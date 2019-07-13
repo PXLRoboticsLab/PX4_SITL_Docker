@@ -19,5 +19,6 @@ nvidia-docker run -it \
     -env="XAUTHORITY=$XAUTH" \
     --volume="$XAUTH:$XAUTH" \
     --runtime=nvidia \
-    research_project1819:latest \
+    --name px4_sitl_docker \
+    px4_sitl_docker:latest \
     bash
