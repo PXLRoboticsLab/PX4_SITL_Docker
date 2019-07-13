@@ -14,14 +14,10 @@ RUN useradd -ms /bin/bash user \
     && echo "user:user" | chpasswd && adduser user sudo \
     && usermod -aG audio user
 
-COPY ./Cyberbotics.asc /root
-
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-key add /root/Cyberbotics.asc \
-        && apt-get update \
+RUN apt-get update \
         && apt-get install -y software-properties-common \
-        && apt-add-repository 'deb http://www.cyberbotics.com/debian/ binary-amd64/' \
         && apt-get update \
         && apt-get install -y libnss3 \
         && rm -rf /var/lib/apt/lists/*
