@@ -9,9 +9,9 @@ import time
 
 # see com.intellij.idea.SocketLock for the server side of this interface
 
-RUN_PATH = u'/home/user/Programs/PyCharm/pycharm-community-2019.1.1/bin/pycharm.sh'
-CONFIG_PATH = u'/home/user/.PyCharmCE2019.1/config'
-SYSTEM_PATH = u'/home/user/.PyCharmCE2019.1/system'
+RUN_PATH = u'/home/user/Programs/PyCharm/pycharm-community-2019.1.3/bin/pycharm.sh'
+CONFIG_PATH = u'/home/user/.PyCharm2019.1/config'
+SYSTEM_PATH = u'/home/user/.PyCharm2019.1/system'
 
 
 def print_usage(cmd):

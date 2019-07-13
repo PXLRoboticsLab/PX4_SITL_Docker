@@ -103,15 +103,15 @@ USER user
 WORKDIR /home/user
 RUN mkdir -p Projects/catkin_ws/src 
 RUN mkdir -p Programs/PyCharm
-COPY ./pycharm-community-2019.1.1.tar.gz Programs/PyCharm/
+COPY ./pycharm/pycharm-community-2019.1.3.tar.gz Programs/PyCharm/
 WORKDIR /home/user/Programs/PyCharm
-RUN tar xvf ./pycharm-community-2019.1.1.tar.gz
-RUN rm ./pycharm-community-2019.1.1.tar.gz
+RUN tar xvf ./pycharm-community-2019.1.3.tar.gz
+RUN rm ./pycharm-community-2019.1.3.tar.gz
 WORKDIR /home/user
-COPY ./PyCharmCE2019.1.tar.gz PyCharmCE2019.1.tar.gz
+COPY ./pycharm/PyCharmCE2019.1.tar.gz PyCharmCE2019.1.tar.gz
 RUN tar xvf ./PyCharmCE2019.1.tar.gz
 RUN rm ./PyCharmCE2019.1.tar.gz
-COPY ./scripts/charm /usr/local/bin/charm
+COPY ./pycharm/charm /usr/local/bin/charm
 
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd /home/user/Projects/catkin_ws; catkin_make'
 
