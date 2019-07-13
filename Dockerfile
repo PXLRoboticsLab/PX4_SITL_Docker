@@ -122,8 +122,7 @@ RUN git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack  \
 
 # Arno alternations
 RUN git clone https://github.com/PX4/Firmware.git ~/Programs/Firmware
-RUN /bin/bash -c 'cd ~/Programs/Firmware; git checkout tags/v1.9.1; cd ~'
-
+RUN /bin/bash -c 'cd ~/Programs/Firmware; git checkout tags/v1.9.2; cd ~'
 
 COPY ./.tmux.conf /home/user/.tmux.conf
 
