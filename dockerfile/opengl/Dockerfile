@@ -9,6 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Install OpenGL packages
 RUN set -x \
+        && apt-get update \
         && apt-get install -y xserver-xorg-video-all mesa-utils \
         && rm -rf /var/lib/apt/lists/*
 
