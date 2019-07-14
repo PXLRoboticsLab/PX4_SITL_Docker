@@ -1,13 +1,11 @@
 # SITL Gazebo Docker
 
-This project contains a Dockerfile and its dependencies to run ROS Melodic, Gazebo, PyCharm, ... in a container with hardware acceleration using nvidia-docker.
+This project contains a Dockerfile and its dependencies to run ROS Melodic, Gazebo, PyCharm, ... in a container with hardware acceleration using nvidia-docker or OpenGL.
 
 ## Prerequisites
 
-- A computer with a recent NVIDIA graphics card
-- Native Linux (Ubuntu, Debian and CentOS are supported, see nvidia-docker)
-- Docker CE installed
-- [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) installed
+- Native Linux (Ubuntu, Debian and CentOS are supported)
+- [Docker CE](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04) installed
 - [Git Large File Storage (LFS) ](https://git-lfs.github.com/) installed
 
 ## General information
@@ -39,13 +37,23 @@ $ git lfs pull
 
 ### 2. Build the image
 
-A simple bash script to build the image is included in this repository.
+The following script will download and install all the dependencies, including ROS Melodic, Gazebo and PyCharm. When completed it should show up in the output of `docker image ls` as `px4_sitl_docker`.
+
+#### 2.1. NVIDIA
+
+If your computer has a NVIDIA GPU and [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) installed, then you can use the dockerfile with your GPU enabled. A simple bash script to build the image is included in this repository.
 
 ```bash
-$ ./build_image.sh
+$ ./build_image_nvidia.sh
 ```
 
-This will download and install all the dependencies, including ROS Melodic, Webots and PyCharm. When completed it should show up in the output of `docker image ls` as `px4_sitl_docker`.
+#### 2.2. OpenGL
+
+If your computer hasn't got a NVIDIA GPU, then you can use the OpenGL variant. A simple bash script to build the image is included in this repository.
+
+```bash
+$ ./build_image_opengl.sh
+```
 
 ### 3. Create a container
 
@@ -53,7 +61,7 @@ Execute the provided bash script called `start_container.sh`. This will create a
 
 ### 4. Using the container
 
-The container will start a simple bash environment. The terminal multiplexer `tmux` is also present. It's advised to use it if multiple bash shells are needed. For example, to run Webots together with other programs.
+The container will start a simple bash environment. The terminal multiplexer `tmux` is also present. It's advised to use it if multiple bash shells are needed. For example, to run Gazebo together with other programs.
 
 A `tmux` [cheat sheet](documents/tmux.pdf) is included in this repository.
 
