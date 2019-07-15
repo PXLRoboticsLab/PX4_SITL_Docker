@@ -90,15 +90,31 @@ USER user
 RUN git clone https://github.com/PX4/Firmware.git ~/Programs/Firmware
 RUN /bin/bash -c 'cd ~/Programs/Firmware; git checkout tags/v1.9.2; cd ~'
 
+# Clone subrepositories 
+WORKDIR /home/user/Programs/Firmware
+RUN git submodule update --init --recursive
+
 # Run catkin_make
 USER root
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd /opt/PXL/catkin_ws; catkin_make'
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd /home/user/Projects/catkin_ws; catkin_make'
 
-# Add setup.bash file to .bashrc of user "user"
+# Build sitl code
+USER user
+WORKDIR /home/user/Programs/Firmware
+RUN DONT_RUN=1 make px4_sitl_default gazebo
+
+# Add setup.bash file to .bashrc of user "user" (environment source)
 RUN echo "source /opt/PXL/catkin_ws/devel/setup.bash" >> /home/user/.bashrc
 RUN echo "source /home/user/Projects/catkin_ws/devel/setup.bash --extend" >> /home/user/.bashrc
 
+# Add setup_gazebo.bash file to .bashrc of user "user" (environment source)
+USER root
+COPY ./scripts/setup_gazebo.bash /scripts/setup_gazebo.bash
+RUN ["chmod", "+x", "/scripts/setup_gazebo.bash"]
+USER user
+RUN echo "source /scripts/setup_gazebo.sh" >> /home/user/.bashrc
+RUN export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd):$(pwd)/Tools/sitl_gazebo
 # Setup PyCharm
 USER user
 WORKDIR /home/user
