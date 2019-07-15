@@ -13,6 +13,7 @@ nvidia-docker run -it \
     -v `pwd`/src:/home/user/Projects/catkin_ws/src \
     -e XDG_RUNTIME_DIR=/tmp/myxdg \
     -e PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native \
+    -e "TERM=xterm-256color" \
     -v ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native \
                   --group-add $(getent group audio | cut -d: -f3) \
     --device /dev/snd \
