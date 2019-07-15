@@ -9,7 +9,8 @@ xhost +local:docker
 # For non root usage:
 # RUN sudo usermod -a -G video developer
 
-docker run \
+docker run -it \
+    -v `pwd`/src:/home/user/Projects/catkin_ws/src \
     --volume=/tmp/.X11-unix:/tmp/.X11-unix \
     --device=/dev/dri:/dev/dri \
     --env="DISPLAY=$DISPLAY" \
