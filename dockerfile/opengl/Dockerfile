@@ -113,7 +113,7 @@ USER root
 COPY ./scripts/setup_gazebo.bash /scripts/setup_gazebo.bash
 RUN ["chmod", "+x", "/scripts/setup_gazebo.bash"]
 USER user
-RUN echo "source /scripts/setup_gazebo.sh" >> /home/user/.bashrc
+RUN echo "source /scripts/setup_gazebo.bash" >> /home/user/.bashrc
 RUN export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd):$(pwd)/Tools/sitl_gazebo
 # Setup PyCharm
 USER user
