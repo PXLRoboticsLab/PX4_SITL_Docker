@@ -96,6 +96,7 @@ RUN git submodule update --init --recursive
 # Run catkin_make
 USER root
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd /opt/PXL/catkin_ws; catkin_make'
+USER user
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd /home/user/Projects/catkin_ws; catkin_make'
 
 # Build sitl code
@@ -117,9 +118,8 @@ RUN export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd):$(pwd)/Tools/sitl_gazebo
 
 # Setup PyCharm
 USER user
-WORKDIR /home/user
-COPY ./pycharm/pycharm-community-2019.1.3.tar.gz Programs/PyCharm/
 WORKDIR /home/user/Programs/PyCharm
+RUN wget https://download.jetbrains.com/python/pycharm-community-2019.1.3.tar.gz
 RUN tar xvf ./pycharm-community-2019.1.3.tar.gz
 RUN rm ./pycharm-community-2019.1.3.tar.gz
 WORKDIR /home/user
