@@ -90,10 +90,12 @@ RUN /bin/bash -c 'cd /opt/PXL/catkin_ws/src/mavros ; git checkout 0.31.0; cd ~'
 RUN bash /opt/PXL/catkin_ws/src/mavros/mavros/scripts/install_geographiclib_datasets.sh
 
 # Clone PX4/Firmware
+USER user
 RUN git clone https://github.com/PX4/Firmware.git ~/Programs/Firmware
 RUN /bin/bash -c 'cd ~/Programs/Firmware; git checkout tags/v1.9.2; cd ~'
 
 # Run catkin_make
+USER root
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd /opt/PXL/catkin_ws; catkin_make'
 RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; cd /home/user/Projects/catkin_ws; catkin_make'
 
@@ -103,6 +105,7 @@ RUN echo "source /home/user/Projects/catkin_ws/devel/setup.bash --extend" >> /ho
 
 # Setup PyCharm
 USER user
+WORKDIR /home/user
 COPY ./pycharm/pycharm-community-2019.1.3.tar.gz Programs/PyCharm/
 WORKDIR /home/user/Programs/PyCharm
 RUN tar xvf ./pycharm-community-2019.1.3.tar.gz
