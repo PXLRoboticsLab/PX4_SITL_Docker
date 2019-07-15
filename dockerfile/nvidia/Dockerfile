@@ -68,11 +68,6 @@ RUN pip install pandas jinja2 pyserial pyyaml pymavlink
 USER user
 WORKDIR /home/user
 
-# Set some decent colors if the container needs to be accessed via /bin/bash.
-RUN echo LS_COLORS=$LS_COLORS:\'di=1\;33:ln=36\' >> ~/.bashrc \
-&& echo export LS_COLORS >> ~/.bashrc \
-&& touch ~/.sudo_as_admin_successful # To surpress the sudo message at run.
-
 # Setup ROS
 RUN rosdep update \
         && echo "source /opt/ros/melodic/setup.bash" >> /home/user/.bashr
@@ -120,6 +115,11 @@ COPY ./pycharm/charm /usr/local/bin/charm
 RUN git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack  \
 && git clone https://github.com/tmux-plugins/tmux-resurrect ~/.tmux-resurrect
 COPY ./.tmux.conf /home/user/.tmux.conf
+
+# Set some decent colors if the container needs to be accessed via /bin/bash.
+RUN echo LS_COLORS=$LS_COLORS:\'di=1\;33:ln=36\' >> ~/.bashrc \
+&& echo export LS_COLORS >> ~/.bashrc \
+&& touch ~/.sudo_as_admin_successful # To surpress the sudo message at run.
 
 # Set initial commands
 USER root
