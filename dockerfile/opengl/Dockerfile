@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Install OpenGL packages
 RUN set -x \
         && apt-get update \
-        && apt-get install -y xserver-xorg-video-all mesa-utils \
+        && apt-get install -y xserver-xorg-video-all libgl1-mesa-glx libgl1-mesa-dri \
         && rm -rf /var/lib/apt/lists/*
 
 # Switch to user "root"
@@ -28,7 +28,7 @@ RUN set -x \
 
 # Add some packages we need later on
 RUN set -x \
-        && apt-get install -y apt-transport-https ca-certificates git vim sudo htop curl wget \
+        && apt-get install -y apt-transport-https ca-certificates git vim sudo htop curl wget mesa-utils \
         && apt-get install -y software-properties-common libnss3 dirmngr gnupg2 lsb-release tmux apt-utils \
         && rm -rf /var/lib/apt/lists/*
 
