@@ -127,6 +127,7 @@ COPY ./scripts/init_commands.sh /scripts/init_commands.sh
 RUN ["chmod", "+x", "/scripts/init_commands.sh"]
 
 # Complete building process of docker container
+USER user
 STOPSIGNAL SIGTERM
 ENTRYPOINT ["/scripts/init_commands.sh"]
 CMD /bin/bash
