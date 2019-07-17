@@ -14,8 +14,8 @@ This project contains a Dockerfile and its dependencies to run ROS Melodic, Gaze
 
 This project has already cloned several repositories. The two most important are [PX4/Firmware](https://github.com/PX4/Firmware.git) and [mavlink/mavros](https://github.com/mavlink/mavros.git).
 
-- mavlink/mavros is set to release 0.31.0 (can be changed [here](https://github.com/PXLRoboticsLab/PX4_SITL_Docker/blob/master/Dockerfile#L92))
-- PX4/Firmware is set to release 1.9.2 (can be changed [here](https://github.com/PXLRoboticsLab/PX4_SITL_Docker/blob/master/Dockerfile#L125))
+- mavlink/mavros is set to release 0.31.0 (can be changed [here for nvidia](https://github.com/PXLRoboticsLab/PX4_SITL_Docker/blob/master/dockerfile/nvidia/Dockerfile#L82) and [here for OpenGL](https://github.com/PXLRoboticsLab/PX4_SITL_Docker/blob/master/dockerfile/opengl/Dockerfile#L83))
+- PX4/Firmware is set to release 1.9.2 (can be changed [here for nvidia](https://github.com/PXLRoboticsLab/PX4_SITL_Docker/blob/master/dockerfile/nvidia/Dockerfile#L88) and [here for OpenGL](https://github.com/PXLRoboticsLab/PX4_SITL_Docker/blob/master/dockerfile/opengl/Dockerfile#L89))
 
 ### Installation locations
 
