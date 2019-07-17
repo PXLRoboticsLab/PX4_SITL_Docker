@@ -13,10 +13,8 @@ RUN set -x \
         && apt-get install -y xserver-xorg-video-all libgl1-mesa-glx libgl1-mesa-dri \
         && rm -rf /var/lib/apt/lists/*
 
-# Switch to user "root"
-USER root
-
 # Setup timezone
+USER root
 RUN echo 'Etc/UTC' > /etc/timezone && \
     ln -s /usr/share/zoneinfo/Etc/UTC /etc/localtime && \
     apt-get update && apt-get install -q -y tzdata && rm -rf /var/lib/apt/lists/*
@@ -115,7 +113,8 @@ COPY ./scripts/setup_gazebo.bash /scripts/setup_gazebo.bash
 RUN ["chmod", "+x", "/scripts/setup_gazebo.bash"]
 USER user
 RUN echo "source /scripts/setup_gazebo.bash" >> /home/user/.bashrc
-RUN export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$(pwd):$(pwd)/Tools/sitl_gazebo
+COPY ./scripts/ros_package_path.bash /scripts/ros_package_path.bash
+RUN echo "source /scripts/ros_package_path.bash" >> /home/user/.bashrc
 
 # Setup PyCharm
 USER user
