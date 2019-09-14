@@ -132,6 +132,17 @@ RUN git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack  \
 && git clone https://github.com/tmux-plugins/tmux-resurrect ~/.tmux-resurrect
 COPY ./.tmux.conf /home/user/.tmux.conf
 
+# Setup serial connection
+USER root
+RUN usermod -a -G dialout user
+RUN apt-get remove modemmanager -y
+RUN apt-get update
+RUN apt install gstreamer1.0-plugins-bad gstreamer1.0-libav libfuse2 fuse libpulse-mainloop-glib0 -y
+
+# Setup QGroundControl
+RUN wget https://s3-us-west-2.amazonaws.com/qgroundcontrol/latest/QGroundControl.AppImage
+RUN chmod +x ./QGroundControl.AppImage
+
 # Set some decent colors if the container needs to be accessed via /bin/bash.
 RUN echo LS_COLORS=$LS_COLORS:\'di=1\;33:ln=36\' >> ~/.bashrc \
 && echo export LS_COLORS >> ~/.bashrc \

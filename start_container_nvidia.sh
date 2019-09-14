@@ -9,7 +9,7 @@ xhost +local:docker
 # For non root usage:
 # RUN sudo usermod -a -G video developer
 
-nvidia-docker run -it \
+nvidia-docker run --privileged -it \
     -v `pwd`/src:/home/user/Projects/catkin_ws/src \
     -e XDG_RUNTIME_DIR=/tmp/myxdg \
     -e PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native \
@@ -23,6 +23,7 @@ nvidia-docker run -it \
     -env="XAUTHORITY=$XAUTH" \
     --volume="$XAUTH:$XAUTH" \
     --runtime=nvidia \
+    --cap-add SYS_ADMIN --device /dev/fuse \
     --name px4_sitl_docker \
-    px4_sitl_docker:latest \
+    px4_sitl_docker_nvidia:latest \
     bash
