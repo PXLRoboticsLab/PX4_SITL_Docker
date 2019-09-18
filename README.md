@@ -39,25 +39,15 @@ $ git lfs pull
 
 The following script will download and install all the dependencies, including ROS Melodic, Gazebo and PyCharm. When completed it should show up in the output of `docker image ls` as `px4_sitl_docker`.
 
-#### 2.1. NVIDIA
-
-If your computer has a NVIDIA GPU and [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) installed, then you can use the dockerfile with your GPU enabled. A simple bash script to build the image is included in this repository.
+If your computer has a NVIDIA GPU and [nvidia-docker](https://github.com/NVIDIA/nvidia-docker) installed, then you can use the dockerfile with your GPU enabled. If your computer hasn't got a NVIDIA GPU, then you can use the OpenGL variant. A simple bash script to build the image is included in this repository.
 
 ```bash
-$ ./build_image_nvidia.sh
-```
-
-#### 2.2. OpenGL
-
-If your computer hasn't got a NVIDIA GPU, then you can use the OpenGL variant. A simple bash script to build the image is included in this repository.
-
-```bash
-$ ./build_image_opengl.sh
+$ ./build_image.sh
 ```
 
 ### 3. Create a container
 
-Execute the provided bash script called `start_container.sh`. This will create a new container with the name 'px4_sitl_docker' with your GPU enabled inside the container.
+Execute the provided bash script called `start_container.sh`. This will create a new container with the name 'px4_sitl_docker' with your NVIDIA GPU or OpenGL enabled inside the container.
 
 ### 4. Using the container
 
