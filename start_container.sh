@@ -28,7 +28,7 @@ if [ $vendor == "NVIDIA" ]; then
         --runtime=nvidia \
         --cap-add SYS_ADMIN --device /dev/fuse \
         --name px4_sitl_docker \
-        px4_sitl_docker_nvidia:latest \
+        px4_sitl_docker:latest \
         bash
 else
     docker run --privileged -it \
@@ -39,6 +39,6 @@ else
         -e "TERM=xterm-256color" \
         --cap-add SYS_ADMIN --device /dev/fuse \
         --name px4_sitl_docker \
-        px4_sitl_docker_opengl:latest \
+        px4_sitl_docker:latest \
         bash
 fi
