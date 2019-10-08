@@ -74,7 +74,7 @@ RUN bash /opt/PXL/catkin_ws/src/mavros/mavros/scripts/install_geographiclib_data
 # Clone PX4/Firmware
 USER user
 RUN git clone https://github.com/PX4/Firmware.git ~/Programs/Firmware
-RUN /bin/bash -c 'cd ~/Programs/Firmware; git checkout tags/v1.9.2; cd ~'
+RUN /bin/bash -c 'cd ~/Programs/Firmware; git checkout 34b03d56593815e16a29ba5dcef9b66208285c98; cd ~'
 
 # Clone subrepositories 
 WORKDIR /home/user/Programs/Firmware
