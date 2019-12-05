@@ -110,11 +110,6 @@ WORKDIR /home/user/Programs/PyCharm
 RUN wget https://download.jetbrains.com/python/pycharm-community-2019.1.3.tar.gz
 RUN tar xvf ./pycharm-community-2019.1.3.tar.gz
 RUN rm ./pycharm-community-2019.1.3.tar.gz
-WORKDIR /home/user
-COPY ./pycharm/PyCharmCE2019.1.tar.gz PyCharmCE2019.1.tar.gz
-RUN tar xvf ./PyCharmCE2019.1.tar.gz
-RUN rm ./PyCharmCE2019.1.tar.gz
-COPY ./pycharm/charm /usr/local/bin/charm
 
 # Setup tmux
 RUN git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack  \
